@@ -1,4 +1,6 @@
 import smbus
+
+bus = smbus.SMBus(1) #set Master
 def send(address,value): #傳入地址與資訊 ＃0 or 字母
     try:
         bus.write_byte(int(address), ord(value))
