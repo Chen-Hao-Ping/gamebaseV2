@@ -30,8 +30,11 @@ def sendWord(word):
             i += 1
     return errorAddress #回報錯誤
 
-def getRespond():
-    return slaveAddressMsg
+def getArduinoRespond():
+    AnswerRespond = []
+    for address in slaveAddressMsg:
+        AnswerRespond.append(DeviceMsg.deviceMsg.setRespond(i2c.Read(address)))
+    return AnswerRespond
 
 if __name__ == '__main__':
     #sendWord("apple")

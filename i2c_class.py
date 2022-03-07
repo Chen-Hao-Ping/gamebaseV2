@@ -12,6 +12,7 @@ class deviceMsg:
         self.__order = order
     def setAddress(self,address):
         self.__address = address
+    
     def setSlaveAddressOrder(self,order,address):
         deviceMsg.setOrder = order
         deviceMsg.setAddress = address
@@ -19,10 +20,16 @@ class deviceMsg:
         deviceMsg.setOrder = order
         deviceMsg.setAddress = address
         deviceMsg.setWord = word
+    
     def getAddress(self):
         return self.__address
     def getOrder(self):
         return self.__order
     def getWord(self):
         return self.__word
+    
+    def setRespond(self,respond):
+        self.__respond = respond
+    def getRespond(self):
+        return self.__respond
     
