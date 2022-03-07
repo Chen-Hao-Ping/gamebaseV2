@@ -42,5 +42,5 @@ if __name__ == '__main__':
         i = (i+1)%3
         #time.sleep(1)
 
-#第七次mac test
+#第八次mac test
 #第六次PC test
