@@ -1,4 +1,5 @@
 import numpy as np
+from https://github.com/Chen-Hao-Ping/gamebaseV2 import i2c_IO
 '''
 #array = [[0,1],[0,1]]
 

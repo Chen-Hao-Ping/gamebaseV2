@@ -1,4 +1,4 @@
-class deviceMsg:
+class DeviceMsg:
     def __init__(self, order, address ,word):
         self.__order = order
         self.__address = address
@@ -14,12 +14,12 @@ class deviceMsg:
         self.__address = address
     
     def setSlaveAddressOrder(self,order,address):
-        deviceMsg.setOrder = order
-        deviceMsg.setAddress = address
+        DeviceMsg.setOrder = order
+        DeviceMsg.setAddress = address
     def setErrorSlaveAddressAndWord(self,order,address,word):
-        deviceMsg.setOrder = order
-        deviceMsg.setAddress = address
-        deviceMsg.setWord = word
+        DeviceMsg.setOrder = order
+        DeviceMsg.setAddress = address
+        DeviceMsg.setWord = word
     
     def getAddress(self):
         return self.__address
@@ -32,4 +32,7 @@ class deviceMsg:
         self.__respond = respond
     def getRespond(self):
         return self.__respond
-    
+    '''
+    def __eq__(self, *args, **kwargs):
+        return object.__eq__(self, *args, **kwargs)
+    '''
