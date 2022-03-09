@@ -30,7 +30,7 @@ void sendData(){
     Wire.write(SLAVE_ADDRESS+1);
     ii = 1;
     SLAVE_ADDRESS = (SLAVE_ADDRESS+1)%3;
-    delay(100000);
+    delay(100);
     
    }else
     ii = 0;
