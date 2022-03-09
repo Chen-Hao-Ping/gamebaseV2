@@ -1,19 +1,24 @@
 import smbus
 
 bus = smbus.SMBus(1) #set Master
-def send(address,value): #傳入地址與資訊 ＃0 or 字母
-    '''
-    value ->0 =>請求order     ascii 30
-            1 =>請求Frist 裝置 ascii 31
-            2 =>請求Secend裝置 ascii 32
-            65-90 =>大寫英文
-            97-112=>小寫英文
-            ord('a') => 97 
-            char(97) => a
-            i2c 位元 ->0 -255
-    '''
+'''
+value ->0 =>請求order     ascii 30
+        1 =>請求Frist 裝置 ascii 31
+        2 =>請求Secend裝置 ascii 32
+        65-90 =>大寫英文  
+        97-112=>小寫英文 -97  0-26 =>a-z  30-32 =>指令
+        ord('a') => 97 
+        char(97) => a
+        i2c 位元 ->0 -255
+'''
+def send(address,firstOrSec,value): #傳入地址與資訊 ＃0 or 字母
+    firstOrSec = firstOrSec
     try:
-        bus.write_byte(int(address), ord(value))
+        if firstOrSec == 1:
+            bus.write_byte(int(address), int(str(1)+str(ord(value))))
+        elif firstOrSec == 2:
+            bus.write_byte(int(address), int(str(2)+str(ord(value))))
+        
         print ('raspi2arduino: ', value)
     except:
         print ("Write_except")
@@ -28,7 +33,7 @@ def ReadF(address):
         print ("Read_except -" + e)
     return msg
     
-def ReadF(address):
+def ReadS(address):
     msg = ""
     try:
         send(address,'2')
@@ -46,4 +51,3 @@ def Read(address):
     except:
         print ("Read_except")
     return msg
-  
