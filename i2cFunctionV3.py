@@ -4,7 +4,7 @@ slaveAddressMsg = []
 def findAddress(): #return address arrary
     for address in range(1,7): #12個字母
         try:
-            i2c.send(address,0)
+            i2c.send(address,'0')
             order = i2c.read(address) #arduino 回傳他目前位置
             slaveAddressMsg.append(claI2c.DeviceMsg(order,address))
         except:
@@ -22,8 +22,8 @@ def sendWord(word):
         i = 0
         for address in addressMsg:
             try:
-                i2c.send(address.getAddress(),word[i*2])
-                i2c.send(address.getAddress(),word[i*2+1])
+                i2c.send(address.getAddress(),1,word[i*2])
+                i2c.send(address.getAddress(),2,word[i*2+1])
             except:
                 print("sent word to arduino was wrong with:"+address)
                 errorAddress.append(address)
@@ -32,9 +32,10 @@ def sendWord(word):
 
 def getArduinoRespond():
     #AnswerRespond = []
+    '''=======================================''' #必須修改ＩＯ 
     for msg in slaveAddressMsg:
-        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespond(i2c.Read(msg.getAddress()))
-        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespond(i2c.Read(msg.getAddress()))
+        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondFrist(i2c.Read(msg.getAddress()))
+        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondSec(i2c.Read(msg.getAddress()))
         #slaveAddressMsg[msg.getOrder()-1].setRespond(i2c.Read(msg.getAddress()))# i需要變更
     return slaveAddressMsg
 '''

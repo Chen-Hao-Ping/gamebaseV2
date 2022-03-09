@@ -1,5 +1,5 @@
 import numpy as np
-from https://github.com/Chen-Hao-Ping/gamebaseV2 import i2c_IO
+#from https://github.com/Chen-Hao-Ping/gamebaseV2 import i2c_IO
 '''
 #array = [[0,1],[0,1]]
 
@@ -73,7 +73,7 @@ class deviceMsg:
     def getWord(self):
         return self.__word
 
-def aa():
+def aa(a):
     return True
 if __name__ == "__main__":
     dev = deviceMsg(2,123)
