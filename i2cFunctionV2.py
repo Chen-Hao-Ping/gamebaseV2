@@ -3,7 +3,7 @@ import i2c_class
 import numpy as np
 slaveAddressMsg = []
 def findAddress(): #return address arrary
-    for address in range(1,11):
+    for address in range(1,7): #12個字母
         try:
             i2c.send(address,0)
             order = i2c.read(address) #arduino 回傳他目前位置
@@ -20,10 +20,11 @@ def sendWord(word):
     if len(word)>len(addressMsg):
         return "len was wrong : word is too long"
     else:
-        i = 0
+        i = 1
         for address in addressMsg:
             try:
-                i2c.send(address.getAddress(),word[i])
+                i2c.send(address.getAddress(),word[2*i-1])
+                i2c.send(address.getAddress(),word[2*i])
             except:
                 print("sent word to arduino was wrong with:"+address)
                 errorAddress.append(address)
@@ -33,6 +34,7 @@ def sendWord(word):
 def getArduinoRespond():
     #AnswerRespond = []
     for msg in slaveAddressMsg:
+        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespond(i2c.Read(msg.getAddress()))
         slaveAddressMsg[slaveAddressMsg.index(msg)].setRespond(i2c.Read(msg.getAddress()))
         #slaveAddressMsg[msg.getOrder()-1].setRespond(i2c.Read(msg.getAddress()))# i需要變更
     return slaveAddressMsg
