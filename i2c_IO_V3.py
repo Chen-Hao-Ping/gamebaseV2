@@ -1,5 +1,4 @@
 import smbus
-from interval import Interval
 '''
 value ->0 =>請求order     ascii 30
         1 =>請求Frist 裝置 ascii 31
@@ -18,7 +17,7 @@ def send(address,firstOrSec,value): #傳入地址與資訊 ＃0 or 字母
             bus.write_byte(int(address), int(str(1)+str(ord(value))))
         elif firstOrSec == 2:
             bus.write_byte(int(address), int(str(2)+str(ord(value))))
-        elif (type(firstOrSec) == int) & Interval(0,26):
+        elif (type(firstOrSec) == int) & :
             bus.write_byte(int(address), ord(value))
         else:
             print("firstOrSec type is error")
