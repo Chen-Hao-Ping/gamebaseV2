@@ -8,6 +8,24 @@ def send(address,value): #傳入地址與資訊 ＃0 or 字母
     except:
         print ("Write_except")
 
+def ReadF(address):
+    msg = ""
+    try:
+        msg = bus.read_byte(int(address))
+        print ('arduino2raspi:', msg)
+    except:
+        print ("Read_except")
+    return msg
+    
+def ReadS(address):
+    msg = ""
+    try:
+        msg = bus.read_byte(int(address))
+        print ('arduino2raspi:', msg)
+    except:
+        print ("Read_except")
+    return msg
+
 def Read(address):
     msg = ""
     try:
@@ -16,3 +34,4 @@ def Read(address):
     except:
         print ("Read_except")
     return msg
+  
