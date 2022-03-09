@@ -12,7 +12,7 @@ def send(address,firstOrSec,value): #傳入地址與資訊 ＃0 or 字母
         print ('raspi2arduino: ', value)
     except:
         print ("Write_except")
-
+'''
 def ReadF(address):
     msg = ""
     try:
@@ -22,7 +22,8 @@ def ReadF(address):
     except Exception as e:
         print ("Read_except -" + e)
     return msg
-    
+'''
+'''
 def ReadS(address):
     msg = ""
     try:
@@ -32,6 +33,7 @@ def ReadS(address):
     except Exception as e:
         print ("Read_except -" + e)
     return msg
+'''
 
 def Read(address):
     msg = ""
