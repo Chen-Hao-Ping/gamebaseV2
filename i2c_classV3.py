@@ -28,10 +28,17 @@ class DeviceMsg:
     def getWord(self):
         return self.__word
     
-    def setRespond(self,respond):
-        self.__respond = respond
-    def getRespond(self):
-        return self.__respond
+    def setRespondFrist(self,respondF):
+        self.__respondF = respondF
+
+    def getRespondFrist(self):
+        return self.__respondF
+    
+    def setRespondSec(self,respondS):
+        self.__respondS = respondS
+        
+    def getRespondSec(self):
+        return self.__respondS
     '''
     def __eq__(self, *args, **kwargs):
         return object.__eq__(self, *args, **kwargs)
