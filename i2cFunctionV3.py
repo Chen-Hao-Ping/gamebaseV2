@@ -1,13 +1,12 @@
-import i2c_IO as i2c
-import i2c_class 
-import numpy as np
+import i2c_IO_V3 as i2c
+import i2c_classV3 as claI2c
 slaveAddressMsg = []
 def findAddress(): #return address arrary
     for address in range(1,7): #12個字母
         try:
             i2c.send(address,0)
             order = i2c.read(address) #arduino 回傳他目前位置
-            slaveAddressMsg.append(i2c_class.DeviceMsg(order,address))
+            slaveAddressMsg.append(claI2c.DeviceMsg(order,address))
         except:
             print("somethong was wrong on address:" +str(address))
     slaveAddressMsg.sort(key=lambda x: x.order)
@@ -17,14 +16,14 @@ def sendWord(word):
     word = str(word)
     addressMsg = findAddress()
     errorAddress = []
-    if len(word)>len(addressMsg):
+    if len(word)>len(addressMsg)*2:
         return "len was wrong : word is too long"
     else:
-        i = 1
+        i = 0
         for address in addressMsg:
             try:
-                i2c.send(address.getAddress(),word[2*i-1])
-                i2c.send(address.getAddress(),word[2*i])
+                i2c.send(address.getAddress(),word[i*2])
+                i2c.send(address.getAddress(),word[i*2+1])
             except:
                 print("sent word to arduino was wrong with:"+address)
                 errorAddress.append(address)
