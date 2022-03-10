@@ -17,6 +17,23 @@ int SLAVE_ADDRESS = 1;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 0;
 char secWord = 0;
+class msg{
+  public:
+    setFirstWord(void);//1XX
+    setSecWord(void);//2XX
+    getFirstWord(char);//+97
+    getSecWord(char);//+97
+    setFirstServus(int);
+    
+    
+    
+  }
+class deviceMsg{
+  public:
+    getOrder(void);
+    sendword(void);
+        
+  }
 void setup() {
   //i2cFuction i2cF();
   Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
