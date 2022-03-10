@@ -37,7 +37,7 @@ def getArduinoRespond():
         slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondFrist(i2c.Read(msg.getAddress()))
         slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondSec(i2c.Read(msg.getAddress()))
         #slaveAddressMsg[msg.getOrder()-1].setRespond(i2c.Read(msg.getAddress()))# i需要變更
-    return slaveAddressMsg
+    return 0
 '''
 def getArduinoRespond():
     AnswerRespond = []
