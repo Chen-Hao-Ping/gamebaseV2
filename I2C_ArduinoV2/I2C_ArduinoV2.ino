@@ -19,45 +19,58 @@ char firstWord = 0;
 char secWord = 0;
 class Msg{
   public:
-    void setFirstWord(char);//1XX
-    void setSecWord(char);//2XX
+    void setFirstWord(int);//1XX // 玩家
+    void setSecWord(int);//2XX   // 玩家
     char getFirstWord(void);//+97
     char getSecWord(void);//+97
     void setFirstServus(int);
     void setSecServus(int);
    private:
-    char FirstWord;
-    char SecWord;  
+    char FirstWord;//讀到得值
+    char SecWord;  //讀到得值
     
     
   };
 class DeviceMsg{
   public:
+    void setOrder(int);
     int getOrder(void);
     void sendword(void);
-        
+  private:
+    int order;      
   };
 
 
-void Msg::setFirstWord(char FirstWord){
-  this->FirstWord = FirstWord;
+void Msg::setFirstWord(int FirstWord){ //FirstWord => 電阻值 
+  this->FirstWord = (FirstWord - 100) + 97;
 }
 void Msg::setSecWord(char SecWord){
-  this->SecWord = SecWord;
+  this->SecWord = (SecWord - 200) + 97;;
 }
 char Msg::getFirstWord(){
+  
   return this -> FirstWord;
 }
 char Msg::getSecWord(){
   return this -> SecWord;
 }
-void setFirstServus(int num){
-  //實作伺服馬達1
+
+
+
+void DeviceMsg::setOrder(int order){
+  this ->order = order;
 }
- 
-void setSecServus(int num){
-  //實作伺服馬達2
+int DeviceMsg::getOrder(){
+  return this->order;
 }
+vodid DeviceMsg::sendword(){
+
+}
+
+Msg msg;
+
+DeviceMsg DM;
+
 void setup() {
   //i2cFuction i2cF();
   Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
@@ -72,7 +85,6 @@ void loop() {
   
 }
 
-Msg msg;
 void getFirst(){
   
   }
