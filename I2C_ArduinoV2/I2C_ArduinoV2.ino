@@ -17,6 +17,47 @@ int SLAVE_ADDRESS = 1;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 0;
 char secWord = 0;
+class Msg{
+  public:
+    void setFirstWord(char);//1XX
+    void setSecWord(char);//2XX
+    char getFirstWord(void);//+97
+    char getSecWord(void);//+97
+    void setFirstServus(int);
+    void setSecServus(int);
+   private:
+    char FirstWord;
+    char SecWord;  
+    
+    
+  };
+class DeviceMsg{
+  public:
+    int getOrder(void);
+    void sendword(void);
+        
+  };
+
+
+void Msg::setFirstWord(char FirstWord){
+  this->FirstWord = FirstWord;
+}
+void Msg::setSecWord(char SecWord){
+  this->SecWord = SecWord;
+}
+char Msg::getFirstWord(){
+  return this -> FirstWord;
+}
+char Msg::getSecWord(){
+  return this -> SecWord;
+}
+void setFirstServus(int num){
+  //實作伺服馬達1
+}
+ 
+void setSecServus(int num){
+  //實作伺服馬達2
+}
 void setup() {
   //i2cFuction i2cF();
   Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
@@ -31,7 +72,7 @@ void loop() {
   
 }
 
-
+Msg msg;
 void getFirst(){
   
   }
@@ -62,6 +103,14 @@ while(Wire.available()) {
   }
 }
 void sendData(){
+    number = Wire.read();
+    
+    if(number == 1){
+      
+      msg.getFirstWord();
+      }else if(number == 2){
+        msg.getSecWord();
+        }
     Wire.write(SLAVE_ADDRESS);
     Wire.begin(SLAVE_ADDRESS); 
 }
