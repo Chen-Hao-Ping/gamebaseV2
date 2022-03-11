@@ -1,4 +1,5 @@
 #include <Wire.h>
+#include <SCoop.h>
 /*
 '''
 value ->0 =>請求order     ascii 30
@@ -19,58 +20,62 @@ char firstWord = 0;
 char secWord = 0;
 class Msg{
   public:
-    void setFirstWord(int);//1XX // 玩家
-    void setSecWord(int);//2XX   // 玩家
+    void setFirstWord(char);//1XX
+    void setSecWord(char);//2XX
     char getFirstWord(void);//+97
     char getSecWord(void);//+97
     void setFirstServus(int);
     void setSecServus(int);
    private:
-    char FirstWord;//讀到得值
-    char SecWord;  //讀到得值
+    char FirstWord;
+    char SecWord;  
     
     
   };
 class DeviceMsg{
   public:
-    void setOrder(int);
     int getOrder(void);
     void sendword(void);
-  private:
-    int order;      
+        
   };
 
 
-void Msg::setFirstWord(int FirstWord){ //FirstWord => 電阻值 
-  this->FirstWord = (FirstWord - 100) + 97;
+void Msg::setFirstWord(char FirstWord){
+  this->FirstWord = FirstWord;
 }
 void Msg::setSecWord(char SecWord){
-  this->SecWord = (SecWord - 200) + 97;;
+  this->SecWord = SecWord;
 }
 char Msg::getFirstWord(){
-  
   return this -> FirstWord;
 }
 char Msg::getSecWord(){
   return this -> SecWord;
 }
-
-
-
-void DeviceMsg::setOrder(int order){
-  this ->order = order;
+void setFirstServus(int num){
+  //實作伺服馬達1
 }
-int DeviceMsg::getOrder(){
-  return this->order;
-}
-vodid DeviceMsg::sendword(){
-
+ 
+void setSecServus(int num){
+  //實作伺服馬達2
 }
 
-Msg msg;
 
-DeviceMsg DM;
-
+defineTask(Task1); 
+  void Task1::setup() {
+    pinMode(13, OUTPUT); 
+    } 
+  void Task1::loop() {
+    digitalWrite(13, HIGH);
+    sleep(1000);
+    digitalWrite(13, LOW);
+    sleep(1000);
+    } 
+defineTaskLoop(Task2) {
+  digitalWrite(12, HIGH);
+  sleep(100);
+  digitalWrite(12, LOW); sleep(100);
+  }
 void setup() {
   //i2cFuction i2cF();
   Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
@@ -79,12 +84,14 @@ void setup() {
   Wire.onReceive(receiveData); //I2C訊號接收時，啟用函式
   
   Wire.onRequest(sendData);  //主機要求讀取時，啟用函式
+  mySCoop.start(); 
 }
 
 void loop() {
-  
+  yield();
 }
 
+Msg msg;
 void getFirst(){
   
   }
