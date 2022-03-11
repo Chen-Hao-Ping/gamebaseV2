@@ -26,6 +26,9 @@ class Msg{
     char getSecWord(void);//+97
     void setFirstServus(int);
     void setSecServus(int);
+    void sendFirstWord(void);
+    void sendSeWord(void);
+    
    private:
     char FirstWord;
     char SecWord;  
@@ -58,6 +61,12 @@ void setFirstServus(int num){
  
 void setSecServus(int num){
   //實作伺服馬達2
+}
+void sendFirstWord(){
+  Wire.write(this -> getFirstWord());
+}
+void sendSeWord(){
+  Wire.write(this -> getSecWord());
 }
 
 
