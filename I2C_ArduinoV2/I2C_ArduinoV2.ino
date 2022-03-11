@@ -29,7 +29,7 @@ class Msg{
     void sendFirstWord(void);
     void sendSeWord(void);
     
-   private:
+  private:
     char FirstWord;
     char SecWord;  
     
