@@ -59,26 +59,23 @@ void setFirstServus(int num){
   //實作伺服馬達1
 }
  
-void setSecServus(int num){
+void Msg::setSecServus(int num){
   //實作伺服馬達2
 }
-void sendFirstWord(){
+void Msg::sendFirstWord(){
   Wire.write(this -> getFirstWord());
 }
-void sendSeWord(){
+void Msg::sendSeWord(){
   Wire.write(this -> getSecWord());
 }
 
 
 defineTask(Task1); 
   void Task1::setup() {
-    pinMode(13, OUTPUT); 
+    
     } 
   void Task1::loop() {
-    digitalWrite(13, HIGH);
-    sleep(1000);
-    digitalWrite(13, LOW);
-    sleep(1000);
+    
     } 
 defineTaskLoop(Task2) {
   digitalWrite(12, HIGH);
