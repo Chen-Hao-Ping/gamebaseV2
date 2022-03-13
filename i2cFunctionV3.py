@@ -4,14 +4,14 @@ slaveAddressMsg = []
 def findAddress(): #return address arrary
     for address in range(1,7): #12個字母
         try:
-            i2c.send(address,'0')
-            order = i2c.read(address) #arduino 回傳他目前位置
+            i2c.send(address,0)
+            order = i2c.read(address,0) #arduino 回傳他目前位置
             slaveAddressMsg.append(claI2c.DeviceMsg(order,address))
         except:
             print("somethong was wrong on address:" +str(address))
     slaveAddressMsg.sort(key=lambda x: x.order)
     return slaveAddressMsg
-
+'''
 def sendWord(word):
     word = str(word)
     addressMsg = findAddress()
@@ -29,15 +29,15 @@ def sendWord(word):
                 errorAddress.append(address)
             i += 1
     return errorAddress #回報錯誤
-
+'''
 def getArduinoRespond():
     #AnswerRespond = []
     '''=======================================''' #必須修改ＩＯ 
     for msg in slaveAddressMsg:
-        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondFrist(i2c.Read(msg.getAddress()))
-        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondSec(i2c.Read(msg.getAddress()))
+        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondFrist(i2c.Read(msg.getAddress(),1))
+        slaveAddressMsg[slaveAddressMsg.index(msg)].setRespondSec(i2c.Read(msg.getAddress(),2))
         #slaveAddressMsg[msg.getOrder()-1].setRespond(i2c.Read(msg.getAddress()))# i需要變更
-    return 0
+    return slaveAddressMsg
 '''
 def getArduinoRespond():
     AnswerRespond = []
@@ -45,15 +45,3 @@ def getArduinoRespond():
         AnswerRespond.append(DeviceMsg.deviceMsg.setRespond(i2c.Read(address.get)))
     return AnswerRespond
 '''
-
-if __name__ == '__main__':
-    #sendWord("apple")
-    i = 3
-    while 1:
-        i2c.send(i,'a')
-        i2c.read(i)
-        i = (i+1)%3
-        #time.sleep(1)
-
-#第八次mac test
-#第六次PC test

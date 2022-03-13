@@ -2,9 +2,9 @@
 #include <SCoop.h>
 /*
 '''
-value ->0 =>請求order     ascii 30
-        1 =>請求Frist 裝置 ascii 31
-        2 =>請求Secend裝置 ascii 32
+value ->0 =>請求order     
+        1 =>請求Frist 裝置 
+        2 =>請求Secend裝置
         3 =>伺服馬達指令
 
         65-90 =>大寫英文  
@@ -37,8 +37,10 @@ class Msg{
   
 class DeviceMsg{
   public:
+    void setOrder(int);
     int getOrder(void);
-    void sendword(void);
+  private:
+    int order;
 };
 
 
@@ -61,6 +63,15 @@ void Msg::sendSeWord(){
   Wire.write(this -> getSecWord());
 }
 
+void DeviceMsg::getOrder(){
+  return this ->order;
+  }
+void DeviceMsg::setOrder(int order){
+  
+  }
+
+
+
 
 
 
@@ -71,36 +82,24 @@ void Msg::sendSeWord(){
 
 Msg msg;
 
+DeviceMsg DM;
 
-
+int waitSend = 255;
 void receiveData(int byteCount){
 while(Wire.available()) {
-    //當I2C的buffer中有資料時進入迴圈
   number = Wire.read();   //指定nubmer 等於讀取的訊息
-  if(number>=100 && number<200){
-    
-    }else if(number>=200){
-      
-      }else if(number == 255){
-        Serial.println("something is wrong!");
-        }else if(number == 30){
-          //請求order
-          }else if(number == 31){
-            //請求First卡槽
-            }else if(number == 32){
-              //請求Sec卡槽
-             }else if(number == 33){
-              //全部動作
-              }
-  Serial.print("data received: ");
+  if(number == 0){
+    waitSend = DM.getOrder()
+  Serial.print("num: ");
   Serial.println(number);
+  Serial.print("waitSend: ");
+  Serial.println(waitSend);
   }
 }
 void sendData(){
     number = Wire.read();
     
     if(number == 1){
-      
       msg.sendFirstWord();
       }else if(number == 2){
         msg.sendSecWord();

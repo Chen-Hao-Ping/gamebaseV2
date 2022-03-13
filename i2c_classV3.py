@@ -1,8 +1,10 @@
 class DeviceMsg:
+    '''
     def __init__(self, order, address ,word):
         self.__order = order
         self.__address = address
         self.__word = word
+    '''
     def __init__(self, order, address):
         self.__order = order
         self.__address = address
@@ -39,7 +41,3 @@ class DeviceMsg:
         
     def getRespondSec(self):
         return self.__respondS
-    '''
-    def __eq__(self, *args, **kwargs):
-        return object.__eq__(self, *args, **kwargs)
-    '''
