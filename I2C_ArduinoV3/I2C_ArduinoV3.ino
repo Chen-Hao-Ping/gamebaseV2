@@ -16,16 +16,14 @@ value ->0 =>請求order     ascii 30
 */
 int SLAVE_ADDRESS = 1;  // 設定Arduino開發板I2C的位址
 int number = 255;
-char firstWord = 0;
-char secWord = 0;
+char firstWord = 255;
+char secWord = 255;
 class Msg{
   public:
     void setFirstWord(char);//1XX
     void setSecWord(char);//2XX
     char getFirstWord(void);//+97
     char getSecWord(void);//+97
-    void setFirstServus(int);
-    void setSecServus(int);
     void sendFirstWord(void);
     void sendSeWord(void);
     
@@ -35,12 +33,13 @@ class Msg{
     
     
   };
+
+  
 class DeviceMsg{
   public:
     int getOrder(void);
     void sendword(void);
-        
-  };
+};
 
 
 void Msg::setFirstWord(char FirstWord){
@@ -55,13 +54,6 @@ char Msg::getFirstWord(){
 char Msg::getSecWord(){
   return this -> SecWord;
 }
-void setFirstServus(int num){
-  //實作伺服馬達1
-}
- 
-void Msg::setSecServus(int num){
-  //實作伺服馬達2
-}
 void Msg::sendFirstWord(){
   Wire.write(this -> getFirstWord());
 }
@@ -70,48 +62,25 @@ void Msg::sendSeWord(){
 }
 
 
-defineTask(Task1); 
-  void Task1::setup() {
-    
-    } 
-  void Task1::loop() {
-    
-    } 
-defineTaskLoop(Task2) {
-  digitalWrite(12, HIGH);
-  sleep(100);
-  digitalWrite(12, LOW); sleep(100);
-  }
-void setup() {
-  //i2cFuction i2cF();
-  Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
-  Wire.begin(SLAVE_ADDRESS);  // 初始化Arduino的I2C位址
-  
-  Wire.onReceive(receiveData); //I2C訊號接收時，啟用函式
-  
-  Wire.onRequest(sendData);  //主機要求讀取時，啟用函式
-  mySCoop.start(); 
-}
 
-void loop() {
-  yield();
-}
+
+
+
+
+
 
 Msg msg;
-void getFirst(){
-  
-  }
-void getSec(){
-  
-  }
+
+
+
 void receiveData(int byteCount){
 while(Wire.available()) {
     //當I2C的buffer中有資料時進入迴圈
   number = Wire.read();   //指定nubmer 等於讀取的訊息
   if(number>=100 && number<200){
-    getFirst();
+    
     }else if(number>=200){
-      getSec();
+      
       }else if(number == 255){
         Serial.println("something is wrong!");
         }else if(number == 30){
@@ -138,4 +107,33 @@ void sendData(){
         }
     Wire.write(SLAVE_ADDRESS);
     Wire.begin(SLAVE_ADDRESS); 
+}  
+
+
+
+void setup() {
+  mySCoop.start(); 
 }
+
+void loop() {
+  yield();
+}
+
+defineTask(I2c); 
+  void I2c::setup() {
+    Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
+    Wire.begin(SLAVE_ADDRESS);  // 初始化Arduino的I2C位址
+    
+    Wire.onReceive(receiveData); //I2C訊號接收時，啟用函式
+    
+    Wire.onRequest(sendData);  //主機要求讀取時，啟用函式
+    } 
+  void I2c::loop() {
+    
+    } 
+
+defineTask(servusControl); 
+  void servusControl::setup() {
+  }
+  void servusControl::loop() {
+  } 
