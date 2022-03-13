@@ -101,9 +101,9 @@ void sendData(){
     
     if(number == 1){
       
-      msg.getFirstWord();
+      msg.sendFirstWord();
       }else if(number == 2){
-        msg.getSecWord();
+        msg.sendSecWord();
         }
     Wire.write(SLAVE_ADDRESS);
     Wire.begin(SLAVE_ADDRESS); 
