@@ -8,8 +8,10 @@ class DeviceMsg:
     def __init__(self, order, address):
         self.__order = order
         self.__address = address
+    '''
     def setWord(self,word):
         self.__word = word
+    '''
     def setOrder(self,order):
         self.__order = order
     def setAddress(self,address):
@@ -18,17 +20,20 @@ class DeviceMsg:
     def setSlaveAddressOrder(self,order,address):
         DeviceMsg.setOrder = order
         DeviceMsg.setAddress = address
+    '''
     def setErrorSlaveAddressAndWord(self,order,address,word):
         DeviceMsg.setOrder = order
         DeviceMsg.setAddress = address
         DeviceMsg.setWord = word
-    
+    '''
     def getAddress(self):
         return self.__address
     def getOrder(self):
         return self.__order
+    '''
     def getWord(self):
         return self.__word
+    '''
     
     def setRespondFrist(self,respondF):
         self.__respondF = respondF
@@ -36,6 +41,7 @@ class DeviceMsg:
     def getRespondFrist(self):
         return self.__respondF
     
+
     def setRespondSec(self,respondS):
         self.__respondS = respondS
         
