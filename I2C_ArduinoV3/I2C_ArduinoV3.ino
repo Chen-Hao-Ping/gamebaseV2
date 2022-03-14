@@ -25,7 +25,7 @@ class Msg{
     char getFirstWord(void);//+97
     char getSecWord(void);//+97
     void sendFirstWord(void);
-    void sendSeWord(void);
+    void sendSecWord(void);
     
   private:
     char FirstWord;
@@ -59,11 +59,11 @@ char Msg::getSecWord(){
 void Msg::sendFirstWord(){
   Wire.write(this -> getFirstWord());
 }
-void Msg::sendSeWord(){
+void Msg::sendSecWord(){
   Wire.write(this -> getSecWord());
 }
 
-void DeviceMsg::getOrder(){
+int DeviceMsg::getOrder(){
   return this ->order;
   }
 void DeviceMsg::setOrder(int order){
@@ -86,14 +86,15 @@ DeviceMsg DM;
 
 int waitSend = 255;
 void receiveData(int byteCount){
-while(Wire.available()) {
-  number = Wire.read();   //指定nubmer 等於讀取的訊息
-  if(number == 0){
-    waitSend = DM.getOrder()
-  Serial.print("num: ");
-  Serial.println(number);
-  Serial.print("waitSend: ");
-  Serial.println(waitSend);
+  while(Wire.available()) {
+    number = Wire.read();   //指定nubmer 等於讀取的訊息
+    if(number == 0){
+      waitSend = DM.getOrder();
+    Serial.print("num: ");
+    Serial.println(number);
+    Serial.print("waitSend: ");
+    Serial.println(waitSend);
+    }
   }
 }
 void sendData(){
@@ -107,16 +108,6 @@ void sendData(){
     Wire.write(SLAVE_ADDRESS);
     Wire.begin(SLAVE_ADDRESS); 
 }  
-
-
-
-void setup() {
-  mySCoop.start(); 
-}
-
-void loop() {
-  yield();
-}
 
 defineTask(I2c); 
   void I2c::setup() {
@@ -136,3 +127,11 @@ defineTask(servusControl);
   }
   void servusControl::loop() {
   } 
+
+void setup() {
+  mySCoop.start(); 
+}
+
+void loop(){
+  yield();
+}
