@@ -1,5 +1,7 @@
 #include <Wire.h>
 #include <SCoop.h>
+#include <Msg.h>
+
 /*
 '''
 value ->0 =>請求order     
@@ -18,7 +20,7 @@ int SLAVE_ADDRESS = 1;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 255;
 char secWord = 255;
-
+/*
 class Msg{
   public:
     void setFirstWord(char);//1XX
@@ -27,21 +29,16 @@ class Msg{
     char getSecWord(void);//+97
     void sendFirstWord(void);
     void sendSecWord(void);
-    
-  private:
-    char FirstWord;
-    char SecWord;  
-  };
-
-  
-class DeviceMsg{
-  public:
     void setOrder(int);
     int getOrder(void);
     void sendOrder(void);
   private:
+    char FirstWord;
+    char SecWord;  
     int order;
-};
+  };
+
+  
 
 
 void Msg::setFirstWord(char FirstWord){
@@ -63,18 +60,17 @@ void Msg::sendSecWord(){
   Wire.write(this -> getSecWord());
 }
 
-int DeviceMsg::getOrder(){
+int Msg::getOrder(){
   return this ->order;
 }
-void DeviceMsg::setOrder(int order){
+void Msg::setOrder(int order){
   //讀取電阻值
 }
-void DeviceMsg::sendOrder(){
+void Msg::sendOrder(){
   Wire.write(this->getOrder());
 }
-
+*/
 Msg msg;
-DeviceMsg DM;
 
 int waitSend = 255;
 void receiveData(int byteCount){
