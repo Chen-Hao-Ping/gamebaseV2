@@ -18,6 +18,7 @@ int SLAVE_ADDRESS = 1;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 255;
 char secWord = 255;
+
 class Msg{
   public:
     void setFirstWord(char);//1XX
@@ -30,8 +31,6 @@ class Msg{
   private:
     char FirstWord;
     char SecWord;  
-    
-    
   };
 
   
@@ -39,6 +38,7 @@ class DeviceMsg{
   public:
     void setOrder(int);
     int getOrder(void);
+    void sendOrder(void);
   private:
     int order;
 };
@@ -65,23 +65,15 @@ void Msg::sendSecWord(){
 
 int DeviceMsg::getOrder(){
   return this ->order;
-  }
+}
 void DeviceMsg::setOrder(int order){
-  
-  }
-
-
-
-
-
-
-
-
-
-
+  //讀取電阻值
+}
+void DeviceMsg::sendOrder(){
+  Wire.write(this->getOrder());
+}
 
 Msg msg;
-
 DeviceMsg DM;
 
 int waitSend = 255;
@@ -104,6 +96,9 @@ void sendData(){
       msg.sendFirstWord();
       }else if(number == 2){
         msg.sendSecWord();
+        }else if(number == 0){
+          DM.getOrder();
+          DM.sendOrder();
         }
     Wire.write(SLAVE_ADDRESS);
     Wire.begin(SLAVE_ADDRESS); 
@@ -112,15 +107,16 @@ void sendData(){
 defineTask(I2c); 
   void I2c::setup() {
     Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
+    
     Wire.begin(SLAVE_ADDRESS);  // 初始化Arduino的I2C位址
     
     Wire.onReceive(receiveData); //I2C訊號接收時，啟用函式
     
     Wire.onRequest(sendData);  //主機要求讀取時，啟用函式
-    } 
+  } 
   void I2c::loop() {
     
-    } 
+  } 
 
 defineTask(servusControl); 
   void servusControl::setup() {
