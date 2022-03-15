@@ -72,43 +72,52 @@ void Msg::sendOrder(){
 */
 Msg msg;
 
-int waitSend = 255;
+//int waitSend = 255;
 void receiveData(int byteCount){
   while(Wire.available()) {
     number = Wire.read();   //指定nubmer 等於讀取的訊息
-    if(number == 0){
-      waitSend = DM.getOrder();
-    Serial.print("num: ");
+    Serial.print("data received: ");
     Serial.println(number);
-    Serial.print("waitSend: ");
-    Serial.println(waitSend);
-    }
   }
 }
 void sendData(){
-    number = Wire.read();
-    
+    //number = Wire.read();
     if(number == 1){
+      
+      msg.setFirstWord(97);//引數為讀取一號角位值
+
       msg.sendFirstWord();
+      
+      //Wire.write(97);
       }else if(number == 2){
+      
+        msg.setSecWord(98);//引數為讀取一號角位值
+
         msg.sendSecWord();
+      
+        //Wire.write(98);
         }else if(number == 0){
-          DM.getOrder();
-          DM.sendOrder();
-        }
-    Wire.write(SLAVE_ADDRESS);
-    Wire.begin(SLAVE_ADDRESS); 
+          
+          msg.setOrder(1);//引數為讀取一號角位值(順序)
+
+          msg.sendOrder();
+          
+          }else if(number == 3){
+
+            //伺服馬達動作
+          }
 }  
 
 defineTask(I2c); 
   void I2c::setup() {
+
     Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
     
     Wire.begin(SLAVE_ADDRESS);  // 初始化Arduino的I2C位址
     
     Wire.onReceive(receiveData); //I2C訊號接收時，啟用函式
     
-    Wire.onRequest(sendData);  //主機要求讀取時，啟用函式
+    Wire.onRequest(sendData);  //主機要求讀取時，啟用函
   } 
   void I2c::loop() {
     
@@ -116,14 +125,26 @@ defineTask(I2c);
 
 defineTask(servusControl); 
   void servusControl::setup() {
+    //一般伺服馬達動作及其他指令設定之setup;
   }
+
   void servusControl::loop() {
+    //一般伺服馬達動作及其他指令設定之loop;
   } 
+
 
 void setup() {
   mySCoop.start(); 
+  /*Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
+    
+    Wire.begin(SLAVE_ADDRESS);  // 初始化Arduino的I2C位址
+    
+    Wire.onReceive(receiveData); //I2C訊號接收時，啟用函式
+    
+    Wire.onRequest(sendData);  //主機要求讀取時，啟用函式*/
 }
 
 void loop(){
   yield();
+  //delay(100);
 }

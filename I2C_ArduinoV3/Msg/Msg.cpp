@@ -1,30 +1,30 @@
 #include<Msg.h>
 #include <Wire.h>
-void setFirstWord(char FirstWord){
-  this->FirstWord = FirstWord;
+void Msg::setFirstWord(char FirstWord){
+  FirstWord = FirstWord;
 }
-void setSecWord(char SecWord){
-  this->SecWord = SecWord;
+void Msg::setSecWord(char SecWord){
+  SecWord = SecWord;
 }
-char getFirstWord(){
-  return this -> FirstWord;
+char Msg::getFirstWord(){
+  return FirstWord;
 }
-char getSecWord(){
-  return this -> SecWord;
+char Msg::getSecWord(){
+  return SecWord;
 }
-void sendFirstWord(){
-  Wire.write(this -> getFirstWord());
+void Msg::sendFirstWord(){
+  Wire.write( getFirstWord());
 }
-void sendSecWord(){
-  Wire.write(this -> getSecWord());
+void Msg::sendSecWord(){
+  Wire.write( getSecWord());
 }
 
-int getOrder(){
-  return this ->order;
+int Msg::getOrder(){
+  return order;
 }
-void setOrder(int order){
+void Msg::setOrder(int order){
   //讀取電阻值
 }
-void sendOrder(){
-  Wire.write(this->getOrder());
+void Msg::sendOrder(){
+  Wire.write(getOrder());
 }
