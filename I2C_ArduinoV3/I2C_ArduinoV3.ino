@@ -16,7 +16,7 @@ value ->0 =>請求order
         i2c 位元 ->0-255
 '''
 */
-int SLAVE_ADDRESS = 1;  // 設定Arduino開發板I2C的位址
+int SLAVE_ADDRESS = 3;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 255;
 char secWord = 255;
@@ -84,22 +84,23 @@ void sendData(){
     //number = Wire.read();
     if(number == 1){
       
-      msg.setFirstWord(97);//引數為讀取一號角位值
+      msg.setFirstWord(SLAVE_ADDRESS+10);//引數為讀取一號角位值
 
       msg.sendFirstWord();
-      
+      Serial.print("on1");
       //Wire.write(97);
       }else if(number == 2){
       
-        msg.setSecWord(98);//引數為讀取一號角位值
+        msg.setSecWord(SLAVE_ADDRESS+11);//引數為讀取一號角位值
 
         msg.sendSecWord();
-      
+        Serial.print("on2");
         //Wire.write(98);
         }else if(number == 0){
           
-          msg.setOrder(1);//引數為讀取一號角位值(順序)
-
+          msg.setOrder(SLAVE_ADDRESS);//引數為讀取一號角位值(順序)
+          Serial.print(msg.getOrder());
+          //Wire.write(SLAVE_ADDRESS);
           msg.sendOrder();
           
           }else if(number == 3){

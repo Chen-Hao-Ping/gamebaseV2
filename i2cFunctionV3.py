@@ -5,8 +5,9 @@ def findAddress(): #return address arrary
     for address in range(1,7): #12個字母
         try:
             i2c.send(address,0)
-            order = i2c.read(address,0) #arduino 回傳他目前位置
-            slaveAddressMsg.append(claI2c.DeviceMsg(order,address))
+            order = i2c.Read(address,0) #arduino 回傳他目前位置
+            obj = claI2c.DeviceMsg(order,address)
+            slaveAddressMsg.append(claI2c(order,address))
         except:
             print("somethong was wrong on address:" +str(address))
     slaveAddressMsg.sort(key=lambda x: x.order)

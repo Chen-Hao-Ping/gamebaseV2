@@ -1,5 +1,5 @@
 import smbus
-from interval import Interval
+#from interval import Interval
 '''
 value ->0 =>請求order     ascii 30
         1 =>請求Frist 裝置 ascii 31
@@ -26,7 +26,7 @@ def send(address,mode): #傳入地址與資訊 ＃0 or 字母
         print ("Write_except")
 
 '''
-def send(address,firstOrSec,value): #傳入地址與資訊 ＃0 or 字母
+def send(address,firstOrSec,value): #傳入地址與資訊 #0 or 字母
     firstOrSec = firstOrSec
     try:
         if firstOrSec == 1:

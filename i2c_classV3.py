@@ -28,6 +28,8 @@ class DeviceMsg:
     '''
     def getAddress(self):
         return self.__address
+
+        
     def getOrder(self):
         return self.__order
     '''
@@ -47,3 +49,7 @@ class DeviceMsg:
         
     def getRespondSec(self):
         return self.__respondS
+
+class test:
+    def __init__(self):
+        return 0

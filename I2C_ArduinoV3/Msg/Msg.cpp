@@ -13,16 +13,18 @@ char Msg::getSecWord(){
   return SecWord;
 }
 void Msg::sendFirstWord(){
-  Wire.write( getFirstWord());
+  Wire.write(getFirstWord());
 }
 void Msg::sendSecWord(){
-  Wire.write( getSecWord());
+  Wire.write(getSecWord());
 }
 
 int Msg::getOrder(){
   return order;
 }
 void Msg::setOrder(int order){
+  this->order = order;
+  
   //讀取電阻值
 }
 void Msg::sendOrder(){

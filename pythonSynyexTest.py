@@ -1,4 +1,4 @@
-import numpy as np
+#import numpy as np
 #from https://github.com/Chen-Hao-Ping/gamebaseV2 import i2c_IO
 '''
 #array = [[0,1],[0,1]]
@@ -59,7 +59,7 @@ class Cars:
         print(f"My car is {self.color} and has {self.seat} seats.")
 mazda = Cars("blue", 4)
 mazda.drive()'''
-
+'''
 class deviceMsg:
     def __init__(self, order, address ,word):
         self.__order = order
@@ -79,4 +79,9 @@ if __name__ == "__main__":
     dev = deviceMsg(2,123)
     dev.setWord("a")
     aa()
-    print("testA:"+dev.getWord())
+    print("testA:"+dev.getWord())'''
+
+from i2c_classV3 import DeviceMsg 
+if __name__ == "__main__":
+    obj = DeviceMsg(1,1)
+    print(obj.getOrder())
