@@ -1,4 +1,5 @@
 import i2c_IO_V3 as i2c
+#from i2c_classV3 import DeviceMsg 
 import i2c_classV3 as claI2c
 slaveAddressMsg = []
 def findAddress(): #return address arrary
