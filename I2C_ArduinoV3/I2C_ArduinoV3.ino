@@ -135,6 +135,7 @@ defineTask(servusControl);
 
 
 void setup() {
+  Serial.print("already");
   mySCoop.start(); 
   /*Serial.begin(9600);   // Serial通訊埠通訊設為9600速率
     
