@@ -8,6 +8,8 @@ def findAddress(): #return address arrary
             i2c.send(address,0)
             order = i2c.Read(address,0) #arduino 回傳他目前位置
             obj = claI2c.DeviceMsg(order,address)
+
+            
             slaveAddressMsg.append(claI2c(order,address))
         except:
             print("somethong was wrong on address:" +str(address))
