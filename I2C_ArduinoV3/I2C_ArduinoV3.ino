@@ -91,7 +91,7 @@ void sendData(){
       //Wire.write(97);
       }else if(number == 2){
       
-        msg.setSecWord(SLAVE_ADDRESS+11);//引數為讀取一號角位值
+        msg.setSecWord(SLAVE_ADDRESS+20);//引數為讀取一號角位值
 
         msg.sendSecWord();
         Serial.print("on2");
