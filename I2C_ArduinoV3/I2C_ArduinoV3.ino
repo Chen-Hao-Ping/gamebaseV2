@@ -20,63 +20,13 @@ value ->0 =>請求order
         i2c 位元 ->0-255
 '''
 */
-int SLAVE_ADDRESS = 3;  // 設定Arduino開發板I2C的位址
+int SLAVE_ADDRESS = 2;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 255;
 char secWord = 255;
-/*
-class Msg{
-  public:
-    void setFirstWord(char);//1XX
-    void setSecWord(char);//2XX
-    char getFirstWord(void);//+97
-    char getSecWord(void);//+97
-    void sendFirstWord(void);
-    void sendSecWord(void);
-    void setOrder(int);
-    int getOrder(void);
-    void sendOrder(void);
-  private:
-    char FirstWord;
-    char SecWord;  
-    int order;
-  };
 
-  
-
-
-void Msg::setFirstWord(char FirstWord){
-  this->FirstWord = FirstWord;
-}
-void Msg::setSecWord(char SecWord){
-  this->SecWord = SecWord;
-}
-char Msg::getFirstWord(){
-  return this -> FirstWord;
-}
-char Msg::getSecWord(){
-  return this -> SecWord;
-}
-void Msg::sendFirstWord(){
-  Wire.write(this -> getFirstWord());
-}
-void Msg::sendSecWord(){
-  Wire.write(this -> getSecWord());
-}
-
-int Msg::getOrder(){
-  return this ->order;
-}
-void Msg::setOrder(int order){
-  //讀取電阻值
-}
-void Msg::sendOrder(){
-  Wire.write(this->getOrder());
-}
-*/
 Msg msg;
 
-//int waitSend = 255;
 void receiveData(int byteCount){
   while(Wire.available()) {
     number = Wire.read();   //指定nubmer 等於讀取的訊息
@@ -88,7 +38,7 @@ void sendData(){
     //number = Wire.read();
     if(number == 1){
       
-      msg.setFirstWord(9);//引數為讀取一號角位值
+      msg.setFirstWord(number+10);//引數為讀取一號角位值
 
       msg.sendFirstWord();
       Serial.print("FirstWord: ");
@@ -99,12 +49,14 @@ void sendData(){
         msg.setSecWord(number+20);//引數為讀取一號角位值
 
         msg.sendSecWord();
-        Serial.println("on2");
+        Serial.print("SecWord: ");
+        Serial.println(msg.getSecWord());
         //Wire.write(98);
         }else if(number == 0){
           
           msg.setOrder(number);//引數為讀取一號角位值(順序)
-          Serial.print(msg.getOrder());
+          Serial.print("Order: ");
+          Serial.println(msg.getOrder());
           //Wire.write(SLAVE_ADDRESS);
           msg.sendOrder();
           
