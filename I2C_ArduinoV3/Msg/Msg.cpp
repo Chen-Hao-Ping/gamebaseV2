@@ -1,6 +1,7 @@
 #include<Msg.h>
 #include <Wire.h>
 void Msg::setFirstWord(char FirstWord){
+  Serial.print(FirstWord);
   FirstWord = FirstWord;
 }
 void Msg::setSecWord(char SecWord){

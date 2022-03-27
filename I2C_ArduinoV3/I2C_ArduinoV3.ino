@@ -1,3 +1,7 @@
+#include <Msg.h>
+
+#include <SCoop.h>
+
 #include <Wire.h>
 #include <SCoop.h>
 #include <Msg.h>
@@ -84,21 +88,22 @@ void sendData(){
     //number = Wire.read();
     if(number == 1){
       
-      msg.setFirstWord(SLAVE_ADDRESS+10);//引數為讀取一號角位值
+      msg.setFirstWord(9);//引數為讀取一號角位值
 
       msg.sendFirstWord();
-      Serial.print("on1");
+      Serial.print("FirstWord: ");
+      Serial.println(msg.getFirstWord());
       //Wire.write(97);
       }else if(number == 2){
       
-        msg.setSecWord(SLAVE_ADDRESS+20);//引數為讀取一號角位值
+        msg.setSecWord(number+20);//引數為讀取一號角位值
 
         msg.sendSecWord();
-        Serial.print("on2");
+        Serial.println("on2");
         //Wire.write(98);
         }else if(number == 0){
           
-          msg.setOrder(SLAVE_ADDRESS);//引數為讀取一號角位值(順序)
+          msg.setOrder(number);//引數為讀取一號角位值(順序)
           Serial.print(msg.getOrder());
           //Wire.write(SLAVE_ADDRESS);
           msg.sendOrder();
