@@ -73,8 +73,14 @@ def Read(address,firstOrSec):
         elif firstOrSec == 2:
             send(address,2)
             msg = bus.read_byte(int(address))
-        if firstOrSec == 0:
+        elif firstOrSec == 0:
             send(address,0)
+            msg = bus.read_byte(int(address))
+        elif firstOrSec == 3:
+            send(address,3)
+            msg = bus.read_byte(int(address))
+        elif firstOrSec == 4:
+            send(address,4)
             msg = bus.read_byte(int(address))
         print ('arduino2raspi:', msg)
     except:
