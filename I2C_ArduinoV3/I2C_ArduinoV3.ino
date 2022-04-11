@@ -5,7 +5,7 @@
 #include <Wire.h>
 #include <SCoop.h>
 #include <Msg.h>
-
+#include <Servo.h>
 /*
 '''
 value ->0 =>請求order     
@@ -24,6 +24,10 @@ int SLAVE_ADDRESS = 2;  // 設定Arduino開發板I2C的位址
 int number = 255;
 char firstWord = 255;
 char secWord = 255;
+Servo myservo2;
+Servo myservo;
+
+int servoTime = 90;
 
 Msg msg;
 
@@ -84,10 +88,47 @@ defineTask(I2c);
 defineTask(servusControl); 
   void servusControl::setup() {
     //一般伺服馬達動作及其他指令設定之setup;
+    myservo.attach(9);
+    //servo2.attach(8);
   }
 
   void servusControl::loop() {
     //一般伺服馬達動作及其他指令設定之loop;
+     myservo.write(servoTime);
+     //servo2.write(servoTime);
+       
+  } 
+  defineTask(servus2Control); 
+  void servus2Control::setup() {
+    //一般伺服馬達動作及其他指令設定之setup;
+   
+    myservo2.attach(10);
+  }
+
+  void servus2Control::loop() {
+    //一般伺服馬達動作及其他指令設定之loop;
+    
+     myservo2.write(servoTime-180);
+       
+  } 
+
+  defineTask(mainTest); 
+  void mainTest::setup() {
+    //一般伺服馬達動作及其他指令設定之setup;
+    
+  }
+
+  void mainTest::loop() {
+    //一般伺服馬達動作及其他指令設定之loop;
+     if(servoTime == 90){
+        servoTime = 180;
+      }
+      sleep(1339);
+     if(servoTime == 180){
+        servoTime = 90;
+      }
+      sleep(50);
+       
   } 
 
 
