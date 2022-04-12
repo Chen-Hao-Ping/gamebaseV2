@@ -67,6 +67,9 @@ void sendData(){
           }else if(number == 3){
 
             //伺服馬達動作
+          }else if(number == 4){
+
+            //botton
           }
 }  
 

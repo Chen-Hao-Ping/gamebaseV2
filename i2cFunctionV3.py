@@ -59,3 +59,5 @@ if __name__ == '__main__':
     #findAddress()
     array = getArduinoRespond()
     print(array[0].getOrder())
+
+    #i2c.Read(address,'''3or4''')
